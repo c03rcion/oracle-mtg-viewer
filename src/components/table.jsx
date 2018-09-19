@@ -29,8 +29,7 @@ class Table extends Component {
                 <div className="col-md-6 col-xs-12">
                     <h3 style={{ textAlign: 'center'}}>{result.setName}: {result.name}</h3>
                     <h5 style={{ textAlign: 'center'}}>
-                        Casting Cost: {result.manaCost}<i className="ms ms-x ms-cost ms-shadow"></i>
-                        <i className="ms ms-r ms-cost ms-shadow"></i>
+                        Casting Cost: {result.manaCost}
                     </h5>
                     <h5 style={{ textAlign: 'center'}}>Type: {result.originalType}</h5>
                     <h5 style={{ textAlign: 'center'}}>Edition: {result.setName}</h5>
