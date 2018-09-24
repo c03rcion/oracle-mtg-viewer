@@ -15,7 +15,7 @@ class Recents extends Component {
                             <li key={card.id} style={{ textAlign: 'center'}} className="list-group-item">
                                 <a href={card.imageUrl}
                                 >            
-                                    {card.name}
+                                    {card.name} <br/> {card.setName}
                                 </a>
                                 <button type="button" 
                                         className="float-right btn btn-danger"
