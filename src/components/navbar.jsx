@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class NavBar extends Component {
     render() {
-        const { value, onChange, onSubmit, count } = this.props;
+        const { value, onChange, onSubmit } = this.props;
         return (
             <React.Fragment>
             <nav style={{ marginBottom: 50 }}className="navbar navbar-light bg-light">
@@ -12,11 +12,11 @@ class NavBar extends Component {
                 <span className="navbar-text">
                     Cards Saved: ({ this.props.storage.length })
                 </span>
-                
 
-                 
+
+                
                 <form 
-                    className="form-inline my-2 my-lg-0"
+                    className="form-inline my-2 my-md-0"
                     onSubmit={onSubmit}
                     >
                     <div className="input-group mb-3">

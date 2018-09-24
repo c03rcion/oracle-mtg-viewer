@@ -6,6 +6,7 @@ import Table from './components/table';
 
 const pathBase = "https://api.magicthegathering.io/v1";
 const pathSearch = "/cards";
+const setSearch = "set=";
 const paramSearch = "?name="; 
 const defaultQuery = "fireball";
 
@@ -19,6 +20,12 @@ class App extends Component {
       storage: [],
       searchTerm: defaultQuery,
     }
+
+    getCardBySet = (event, print, name) => {
+      this.fetchCardBySet(print, name);
+      event.preventDefault();
+    }
+    
 
     removeCard = name => {
       localStorage.removeItem(name);
@@ -58,6 +65,13 @@ class App extends Component {
       this.setState({ result: result.cards[0] })
     }
 
+    fetchCardBySet(print, name) {
+      fetch(`${pathBase}${pathSearch}${paramSearch}${name}&${setSearch}${print}`)
+          .then(response => response.json())
+          .then(response => this.setState({ result: response.cards[0] }))
+          .catch(error => error)
+    }
+
     fetchCardByName(searchTerm) {
       console.log(`${pathBase}${pathSearch}${paramSearch}${searchTerm}&contains=imageUrl`)
       fetch(`${pathBase}${pathSearch}${paramSearch}${searchTerm}&contains=imageUrl`)
@@ -84,7 +98,10 @@ class App extends Component {
           storage={storage}
         />
         <main className="container">
-          {result ? <Table result={result} storage={storage} onClick={this.handleButtonClick} removeCard={this.removeCard} /> : null}
+          {result ? <Table result={result} 
+          storage={storage} onClick={this.handleButtonClick} 
+          removeCard={this.removeCard} getCardBySet={this.getCardBySet}
+          /> : null}
           
         </main>
       </React.Fragment>

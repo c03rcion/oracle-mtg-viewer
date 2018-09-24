@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-const pathBase = "https://api.magicthegathering.io/v1";
-const pathSearch = "/cards";
-const setSearch = "set=";
-const paramSearch = "?name=";
+// const pathBase = "https://api.magicthegathering.io/v1";
+// const pathSearch = "/cards";
+// const setSearch = "set=";
+// const paramSearch = "?name=";
 
 class Printings extends Component {
 
@@ -15,6 +15,7 @@ class Printings extends Component {
 
     render() {
         const { result } = this.props;
+        const name = result.name;
         return (
             <section id="printings" style={{ marginTop: 30}}>
                 <h5 style={{ textAlign: 'center'}}>Printings</h5>
@@ -32,11 +33,13 @@ class Printings extends Component {
                                 margin: '5px', 
                                 marginLeft: '-2px', 
                                 width: '50px',
-                            }}    
+                            }}
+                                    
                             >
                            
                               <a style={{ textDecoration: 'none !important', color: 'black', display: 'block', height: '50px', width: '50px' }}
-                                href={`${pathBase}${pathSearch}${paramSearch}${result.name}&${setSearch}${print}`}
+                                href=""
+                                onClick={(event) => this.props.onClick(event, print, name)}
                               >
                                <i style={{ fontSize: 32}}
                                 className={this.getSetIcon(print)}

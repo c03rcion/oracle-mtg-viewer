@@ -7,7 +7,7 @@ import Recents from './recents';
 class Table extends Component {
 
     render () {
-        const { result, error, onClick, removeCard, storage } = this.props;
+        const { result, error, getCardBySet, onClick, removeCard, storage } = this.props;
         console.log(result.manaCost)
         if (error) {
             return <p>Card not found.</p>;
@@ -41,7 +41,7 @@ class Table extends Component {
                         {result.text}
                     </h5>
                     <hr/>
-                    <Printings result={result} />
+                    <Printings result={result} onClick={getCardBySet} />
                     <Rulings result={result} />    
                 </div>
                 <div className="col-md-3 col-xs-12">
