@@ -86,7 +86,7 @@ class App extends Component {
     componentDidMount() {
       const { searchTerm } = this.state;
       this.fetchCardByName(searchTerm);
-      this.fetchLocalStorage();
+      // this.fetchLocalStorage();
     }
 
   render() {
