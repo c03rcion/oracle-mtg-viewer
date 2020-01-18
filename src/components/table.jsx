@@ -8,23 +8,22 @@ class Table extends Component {
 
     render () {
         const { result, error, getCardBySet, onClick, removeCard, storage } = this.props;
-        console.log(result.manaCost)
+
         if (error) {
+            console.log(error);
             return <p>Card not found.</p>;
           }
         return (
             <div className="row">
                 <div className="col-md-3 col-xs-12">
-                    <img className="mx-auto" alt="" src={result.imageUrl}/>
+                    <img className="mx-auto d-block" alt="" src={result.imageUrl}/>
                     <button 
                         type="button" 
-                        className="btn btn-primary mx-auto mt-4 mb-4"
-                        style={{ display: "block" }}
+                        className="btn btn-success mx-auto mt-4 mb-4 d-block"
                         onClick={onClick}
                     >
                         Save
                     </button>
-                    
                 </div>
                 <div className="col-md-6 col-xs-12">
                     <h3 style={{ textAlign: 'center'}}>{result.setName}: {result.name}</h3>

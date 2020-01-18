@@ -33,14 +33,14 @@ class Printings extends Component {
                                 margin: '5px', 
                                 marginLeft: '-2px', 
                                 width: '50px',
-                            }}
+                                }}
                                     
                             >
                            
-                              <a style={{ textDecoration: 'none !important', color: 'black', display: 'block', height: '50px', width: '50px' }}
+                                <a className="btn btn-success" style={{ textDecoration: 'none !important', color: 'white', display: 'block', height: '50px', width: '50px' }}
                                 href=""
-                                onClick={(event) => this.props.onClick(event, print, name)}
-                              >
+                                onClick={(event) => this.props.onClick(event, print, name)}>
+
                                <i style={{ fontSize: 32}}
                                 className={this.getSetIcon(print)}
                                 data-toggle="tooltip"

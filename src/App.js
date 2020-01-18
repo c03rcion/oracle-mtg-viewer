@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import NavBar from './components/navbar';
 import Table from './components/table';
 
@@ -19,7 +20,10 @@ class App extends Component {
       error: null,
       storage: [],
       searchTerm: defaultQuery,
+      isLoading: false,
     }
+
+    
 
     getCardBySet = (event, print, name) => {
       this.fetchCardBySet(print, name);
@@ -40,7 +44,6 @@ class App extends Component {
       };
       this.setState({ storage: hotdog });
       this.setState({ count:  localStorageLength })
-      console.log(this.state.count);
     }
 
     handleButtonClick = () => {
@@ -52,7 +55,6 @@ class App extends Component {
     handleSearchChange = event => {
       const searchTerm = event.target.value;
       this.setState({ searchTerm: searchTerm });
-      console.log(this.state.searchTerm)
     }
 
     handleSearchSubmit = event => {
@@ -62,7 +64,7 @@ class App extends Component {
     }
 
     setSearchResults = result => {
-      this.setState({ result: result.cards[0] })
+      this.setState({ result: result.cards[0], isLoading: false })
     }
 
     fetchCardBySet(print, name) {
@@ -73,11 +75,11 @@ class App extends Component {
     }
 
     fetchCardByName(searchTerm) {
-      console.log(`${pathBase}${pathSearch}${paramSearch}${searchTerm}&contains=imageUrl`)
+      this.setState({ isLoading: true })
       fetch(`${pathBase}${pathSearch}${paramSearch}${searchTerm}&contains=imageUrl`)
         .then(response => response.json())
         .then(result => this.setSearchResults(result))
-        .catch(error => this.setState({ error: error }));
+        .catch(error => console.log(error))
     }
 
 
@@ -88,7 +90,35 @@ class App extends Component {
     }
 
   render() {
-    const { searchTerm, result, storage } = this.state;
+    const { searchTerm, result, storage, isLoading } = this.state;
+
+    const cardWrapper = {
+      position: 'relative',
+      width: '300px',
+      height: '500px',
+  }
+    const spinnerWrapper = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginLeft: 'auto',
+      marginRight: 'auto', 
+      transform: 'translate(-50%,-50%)', 
+      color: 'orange',
+  }
+    
+    if (isLoading) {
+      return (
+        <div className="row h-100">
+          <div className="col-sm-12 my-auto">
+            <div className="spinner-border d-block mx-auto" role="status">
+            </div>
+          </div>
+        </div>
+      )
+  };
+
+
     return (
       <React.Fragment>
         <NavBar
@@ -101,7 +131,7 @@ class App extends Component {
           {result ? <Table result={result} 
           storage={storage} onClick={this.handleButtonClick} 
           removeCard={this.removeCard} getCardBySet={this.getCardBySet}
-          /> : null}
+          /> : <p>Card not found.</p>}
           
         </main>
       </React.Fragment>
