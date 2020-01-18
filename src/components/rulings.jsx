@@ -13,7 +13,7 @@ class Rulings extends Component {
                  <div className="card text-center text-white bg-success mb-3">
                     <div className="card-header">
                         Ruling #{result.rulings.indexOf(rule) + 1}
-                        <a className="float-right"
+                        <a className="text-white float-right"
                             href="#collapseExample"
                             data-toggle="collapse"
                             data-target="#collapseExample"

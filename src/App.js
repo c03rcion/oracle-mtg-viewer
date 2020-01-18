@@ -23,8 +23,6 @@ class App extends Component {
       isLoading: false,
     }
 
-    
-
     getCardBySet = (event, print, name) => {
       this.fetchCardBySet(print, name);
       event.preventDefault();
@@ -68,9 +66,11 @@ class App extends Component {
     }
 
     fetchCardBySet(print, name) {
+      this.setState({ isLoading: true })
+      
       fetch(`${pathBase}${pathSearch}${paramSearch}${name}&${setSearch}${print}`)
           .then(response => response.json())
-          .then(response => this.setState({ result: response.cards[0] }))
+          .then(response => this.setState({ result: response.cards[0], isLoading: false }))
           .catch(error => error)
     }
 
@@ -86,7 +86,9 @@ class App extends Component {
     componentDidMount() {
       const { searchTerm } = this.state;
       this.fetchCardByName(searchTerm);
-      // this.fetchLocalStorage();
+      // if (localStorage) {
+      //   this.fetchLocalStorage();
+      // }
     }
 
   render() {
@@ -109,11 +111,11 @@ class App extends Component {
     
     if (isLoading) {
       return (
-        <div className="row h-100">
-          <div className="col-sm-12 my-auto">
-            <div className="spinner-border d-block mx-auto" role="status">
+        <div style={{ alignItems: 'center', display: 'flex', height: '100%', width: '100%', top: '0', position: 'fixed' }} className="row">
+            <div 
+            style={{ width: '5rem', height: '5rem'}} 
+            className="spinner-grow text-success d-flex mx-auto" role="status">
             </div>
-          </div>
         </div>
       )
   };
